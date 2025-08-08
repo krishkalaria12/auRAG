@@ -81,7 +81,7 @@ async def health_check():
         timestamp=time.time()
     )
 
-@app.post("/hackrx/run", response_model=QueryResponse)
+@app.post("/api/v1/hackrx/run", response_model=QueryResponse)
 async def run_query(
     request: QueryRequest,
     background_tasks: BackgroundTasks,
@@ -92,7 +92,7 @@ async def run_query(
     
     try:
         # Load and index document
-        # chunks = await asyncio.to_thread(load_and_index_document, request.documents)
+        chunks = await asyncio.to_thread(load_and_index_document, request.documents)
         
         # Process questions SEQUENTIALLY - one at a time
         results = []
